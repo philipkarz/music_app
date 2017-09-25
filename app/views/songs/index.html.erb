@@ -1,0 +1,38 @@
+<h1>Songs Index</h1>
+
+<% @songs.each do |s| %>
+    <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
+        <button id="play-<%= s.id %>">Play</button>           
+    </div>
+<% end %>
+
+
+
+
+<script>
+    var players = document.querySelectorAll('.player')
+    players.forEach(function(player) {
+
+        var songId = player.dataset.id
+        
+        player.wavesurfer = WaveSurfer.create({
+            container: '#song-' + songId,
+            // progressColor: #333,
+            normalize: true
+        });
+        
+        
+        player.wavesurfer.load(player.dataset.songfile)
+        
+        player.wavesurfer.on('ready', function () {
+            document.getElementById('play-' + player.dataset.id).onclick = function(){
+                if(player.wavesurfer.isPlaying()){
+                    player.wavesurfer.pause()
+                }
+                else{
+                    player.wavesurfer.play()
+                }
+            }
+        });
+    })
+</script>
