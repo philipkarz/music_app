@@ -1,2 +1,34 @@
-<h1>Songs#show</h1>
-<p>Find me in app/views/songs/show.html.erb</p>
+<h1><%= link_to @song.title, song_path(@song.id) %></h1>
+
+<div class="player" data-songfile="<%= @song.songfile %>" data-id="<%= @song.id %>" id="song-<%= @song.id %>"> 
+    <h3>#<%= @song.genre %></h3>
+    <button type="button" class="btn" id="play-<%= @song.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
+</div>
+
+<script>
+        var players = document.querySelectorAll('.player')
+        players.forEach(function(player) {
+    
+            var songId = player.dataset.id
+            
+            player.wavesurfer = WaveSurfer.create({
+                container: '#song-' + songId,
+                progressColor: 'orange',
+                normalize: true
+            });
+            
+            
+            player.wavesurfer.load(player.dataset.songfile)
+            
+            player.wavesurfer.on('ready', function () {
+                document.getElementById('play-' + player.dataset.id).onclick = function(){
+                    if(player.wavesurfer.isPlaying()){
+                        player.wavesurfer.pause()
+                    }
+                    else{
+                        player.wavesurfer.play()
+                    }
+                }
+            });
+        })
+    </script>

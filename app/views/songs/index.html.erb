@@ -1,11 +1,23 @@
-<h1>Songs Index</h1>
+<div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-3">Fluid jumbotron</h1>
+          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        </div>
+</div>
 
 <% @songs.each do |s| %>
     <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
-        <h2><%= link_to @users.find(s.user_id).username, user_path(s.user_id) %> - <%= s.title %></h2>
+        <h2><%= link_to @users.find(s.user_id).username, user_path(s.user_id) %> - <%= link_to s.title, song_path(s.id) %></h2>
         <h3>#<%= s.genre %></h3>
         <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
     </div>
+    <% if logged_in? %>
+        <%= form_for @comment, :html => {:class => 'form_group'} do |c|%>
+            <% c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
+        <% end %>
+    <% else %>
+    <h3>A comment</h3> 
+    <% end %>
 <% end %>
 
 
