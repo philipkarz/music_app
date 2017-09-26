@@ -1,2 +1,36 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<h1><%= @user.username %></h1>
+ <% @songs.each do |s| %>
+    <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
+        <h2><%= link_to @user.username, user_path(@user.id) %> - <%= s.title %></h2>
+        <h3>#<%= s.genre %></h3>
+        <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
+    </div>
+ <% end %>
+
+ <script>
+        var players = document.querySelectorAll('.player')
+        players.forEach(function(player) {
+    
+            var songId = player.dataset.id
+            
+            player.wavesurfer = WaveSurfer.create({
+                container: '#song-' + songId,
+                progressColor: 'orange',
+                normalize: true
+            });
+            
+            
+            player.wavesurfer.load(player.dataset.songfile)
+            
+            player.wavesurfer.on('ready', function () {
+                document.getElementById('play-' + player.dataset.id).onclick = function(){
+                    if(player.wavesurfer.isPlaying()){
+                        player.wavesurfer.pause()
+                    }
+                    else{
+                        player.wavesurfer.play()
+                    }
+                }
+            });
+        })
+    </script>

@@ -1,0 +1,32 @@
+<!-- this is a partial template because of the underscore in front of name -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+        <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button> -->
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+                <% if logged_in? %>
+                <h1>YOU ARE LOGGED IN</h1>
+                <li  class: "nav-item">
+                <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+                </li>
+                <li  class: "nav-item">
+                <%= link_to "logout", logout_path, method: 'delete', class: "nav-link" %>
+                </li>
+                <li  class: "nav-item">
+                <%= link_to "Delete Account", user_path(current_user), method: 'delete', class: "nav-link"%>
+                </li>
+                <% else %>
+                <!-- show sign in or sign up -->
+                <li  class: "nav-item">
+                <%= link_to 'Log In', new_session_path, class: "nav-link" %>
+                </li>
+                <li  class: "nav-item">
+                <%= link_to 'Sign Up', new_user_path, class: "nav-link" %>
+                </li>
+                <% end %>
+          </ul>
+        </div>
+</nav>

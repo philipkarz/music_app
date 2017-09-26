@@ -10,7 +10,17 @@
   </head>
 
   <body>
+      <%= render 'layouts/partials/navbar' %>
+     <!-- #d danger, m message -->
+     <% flash.each do |d, m| %>
+      <div class="alert alert-<%= d%>">
+        <%= m %>
+      </div>
+    <% end %>
+    
+    <div class= "container">
     <%= yield %>
+    </div>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

@@ -2,11 +2,11 @@
 
 <% @songs.each do |s| %>
     <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
-        <button id="play-<%= s.id %>">Play</button>           
+        <h2><%= link_to @users.find(s.user_id).username, user_path(s.user_id) %> - <%= s.title %></h2>
+        <h3>#<%= s.genre %></h3>
+        <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
     </div>
 <% end %>
-
-
 
 
 <script>
@@ -17,7 +17,7 @@
         
         player.wavesurfer = WaveSurfer.create({
             container: '#song-' + songId,
-            // progressColor: #333,
+            progressColor: 'orange',
             normalize: true
         });
         
