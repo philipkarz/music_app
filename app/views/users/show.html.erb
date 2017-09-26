@@ -1,12 +1,22 @@
 <h1><%= @user.username %></h1>
- <% @songs.each do |s| %>
-    <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
-        <h2><%= link_to @user.username, user_path(@user.id) %> - <%= s.title %></h2>
-        <h3>#<%= s.genre %></h3>
-        <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
-    </div>
- <% end %>
-
+<% if @songs.size == 0 %>
+    <h1>Produce Some Music Fool</h1>
+<% else %>
+    <% @songs.each do |s| %>
+        <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
+            <h2><%= link_to @user.username, user_path(@user.id) %> - <%= link_to s.title, song_path(s.id) %></h2>
+            <h3>#<%= s.genre %></h3>
+            <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
+        </div>
+        <%= form_for @comment, :html => {:class => 'form_group'} do |c|%>
+        <%= c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
+        <%= c.hidden_field :song_id, value: s.id %>
+    <% end %>
+    <ul class="list group">
+    <li class="list-group-item"><%= s.comments.first.user.username %> - <%= s.comments.first.comment %></li>
+    </ul>
+    <% end %>
+<% end %>
  <script>
         var players = document.querySelectorAll('.player')
         players.forEach(function(player) {

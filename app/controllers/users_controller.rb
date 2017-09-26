@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @songs = @user.songs
+    @comment = Comment.new
   end
 
   def new
@@ -26,6 +27,12 @@ class UsersController < ApplicationController
 
   def edit
     #edit user if signed in
+    if logged_in?
+      @user = current_user
+    else
+      flash[:danger] = "Do Not Attempt To Edit Another User"
+      redirect_to new_session_path
+    end
   end
 
   def update

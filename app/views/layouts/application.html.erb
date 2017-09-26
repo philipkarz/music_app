@@ -21,6 +21,7 @@
     <div class= "container">
     <%= yield %>
     </div>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- added 'data-turbolinks-eval': 'false' below -->
+    <%= javascript_include_tag 'application', 'data-turbolinks-eval': 'false', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>

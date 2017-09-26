@@ -9,15 +9,16 @@
     <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
         <h2><%= link_to @users.find(s.user_id).username, user_path(s.user_id) %> - <%= link_to s.title, song_path(s.id) %></h2>
         <h3>#<%= s.genre %></h3>
+        <h3><%= time_ago_in_words s.created_at %></h3>
         <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
     </div>
-    <% if logged_in? %>
         <%= form_for @comment, :html => {:class => 'form_group'} do |c|%>
-            <% c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
+            <%= c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
+            <%= c.hidden_field :song_id, value: s.id %>
         <% end %>
-    <% else %>
-    <h3>A comment</h3> 
-    <% end %>
+        <ul class="list group">
+        <li class="list-group-item"><%= s.comments.first.user.username %> - <%= s.comments.first.comment %></li>
+        </ul>
 <% end %>
 
 

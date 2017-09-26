@@ -1,2 +1,17 @@
-<h1>Users#edit</h1>
-<p>Find me in app/views/users/edit.html.erb</p>
+<h1><%= current_user.username %></h1>
+<%= form_for @user do |f| %>
+    <%= f.text_field :username, :placeholder => current_user.username %><br>
+    <%=f.text_field :profpic, :placeholder => current_user.profpic %><br>
+    <%=f.text_field :covpic, :placeholder => current_user.covpic %><br>
+    <%=f.text_field :chadress, :placeholder => current_user.chadress %><br>
+    <%=f.text_field :hometown, :placeholder => current_user.hometown %><br>
+    <%=f.text_field :website, :placeholder => current_user.website %><br>
+    <%=f.text_field :facebook, :placeholder => current_user.facebook %><br>
+    <%=f.text_field :twitter, :placeholder => current_user.twitter %><br>
+    <%=f.text_field :instagram, :placeholder => current_user.instagram %><br>
+    <%=f.text_field :spotify, :placeholder => current_user.spotify %><br>
+    <%= f.submit "Update Account", :class => "btn"%>
+    <%= link_to "Delete Account", user_path(current_user), method: 'delete', class: "btn btn-danger"%>
+<% end %>
+
+

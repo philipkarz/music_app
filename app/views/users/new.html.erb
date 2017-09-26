@@ -1,8 +1,8 @@
 <h1>Create Account</h1>
-<%= form_for @user do |f| %>
-    <%= f.text_field :username, :placeholder => 'username' %><br>
-    <%= f.text_field :email, :placeholder => 'email' %><br>
-    <%= f.password_field :password, :placeholder => 'password' %><br>
-    <%= f.password_field :password_confirmation, :placeholder => 'confirm password' %><br>
-    <%= f.submit "Confirm" %>
+<%= form_for @user, :html => {:class => "form-group"} do |f| %>
+    <%= f.text_field :username, :placeholder => 'username', class: "form-control" %><br>
+    <%= f.text_field :email, :placeholder => 'email', class: "form-control" %><br>
+    <%= f.password_field :password, :placeholder => 'password', class: "form-control" %><br>
+    <%= f.password_field :password_confirmation, :placeholder => 'confirm password', class: "form-control" %><br>
+    <%= f.submit "Confirm", class: 'btn'%>
 <% end %>
