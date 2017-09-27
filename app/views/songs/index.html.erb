@@ -1,12 +1,14 @@
+<% unless  logged_in? %>
 <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-3">Fluid jumbotron</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <h1 class="display-3">Welcome to Free.ly</h1>
+          <p class="lead">Sustainable music for the world. No ads, Great perks, Always free</p>
         </div>
 </div>
-
+<% end %>
 <% @songs.each do |s| %>
     <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
+        <%= image_tag  s.user.avatar.url(:thumb), size: "100x100" %>
         <h2><%= link_to @users.find(s.user_id).username, user_path(s.user_id) %> - <%= link_to s.title, song_path(s.id) %></h2>
         <h3>#<%= s.genre %></h3>
         <h3><%= time_ago_in_words s.created_at %></h3>

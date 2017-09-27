@@ -1,8 +1,8 @@
 <h1><%= current_user.username %></h1>
 <%= form_for @user do |f| %>
     <%= f.text_field :username, :placeholder => current_user.username %><br>
-    <%=f.text_field :profpic, :placeholder => current_user.profpic %><br>
-    <%=f.text_field :covpic, :placeholder => current_user.covpic %><br>
+    Profile Pic <%=f.file_field :avatar %><br>
+    Cover Photo <%=f.file_field :covpic, :placeholder => current_user.covpic %><br>
     <%=f.text_field :chadress, :placeholder => current_user.chadress %><br>
     <%=f.text_field :hometown, :placeholder => current_user.hometown %><br>
     <%=f.text_field :website, :placeholder => current_user.website %><br>

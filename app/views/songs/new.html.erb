@@ -1,2 +1,8 @@
-<h1>Songs#new</h1>
-<p>Find me in app/views/songs/new.html.erb</p>
+<h1>Song Upload</h1>
+ <%= form_for @song, :html => {:class => "form-group"} do |f| %>
+    Title <%= f.text_field :title, class: "form-control" %>
+    Genre <%= f.text_field :genre, class: "form-control" %><br>
+    Cover Image <%= f.file_field :songpic, class: "form-control" %><br>
+    Audio File <%= f.file_field :songfile, class: "form-control" %>
+ <%= f.submit %>
+ <% end %>

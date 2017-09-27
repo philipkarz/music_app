@@ -37,6 +37,12 @@ class UsersController < ApplicationController
 
   def update
     #gets called on edit form submission
+    @user = current_user
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      redirect_to edit_user_path(@user)
+    end
   end
 
   def destroy
@@ -46,7 +52,7 @@ class UsersController < ApplicationController
   #makes sure you cant do things like adding an admin field and making it true
   #user_params is anything we will use in user#create
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar)
     #password_confirmation makes passwords have to match to be saved
   end
 end
