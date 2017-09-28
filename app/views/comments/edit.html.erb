@@ -1,2 +1,45 @@
-<h1>Comments#edit</h1>
-<p>Find me in app/views/comments/edit.html.erb</p>
+<%= image_tag  @song.user.avatar.url(:thumb), size: "100x100" %>
+<h1><%= link_to @song.user.username, user_path(@song.user) %> - <%= link_to @song.title, song_path(@song.id) %></h1>
+
+<div class="player" data-songfile="<%= @song.songfile %>" data-id="<%= @song.id %>" id="song-<%= @song.id %>"> 
+    <h3>#<%= @song.genre %></h3>
+    <h3><%= time_ago_in_words @song.created_at %></h3>
+    <button type="button" class="btn" id="play-<%= @song.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
+</div>
+<% if @song.user == current_user %>
+    <%= link_to "Edit Song", edit_song_path(@song) %>
+<% end %>
+<% if logged_in? %>
+    <%= form_for @comment, :html => {:class => 'form_group'} do |c|%>
+        <%= c.text_field :comment, :placeholder => @comment.comment, class: 'form-control' %>
+        <%= c.hidden_field :song_id, value: @song.id %>
+    <% end %>
+<% end %>
+
+<script>
+        var players = document.querySelectorAll('.player')
+        players.forEach(function(player) {
+    
+            var songId = player.dataset.id
+            
+            player.wavesurfer = WaveSurfer.create({
+                container: '#song-' + songId,
+                progressColor: 'orange',
+                normalize: true
+            });
+            
+            
+            player.wavesurfer.load(player.dataset.songfile)
+            
+            player.wavesurfer.on('ready', function () {
+                document.getElementById('play-' + player.dataset.id).onclick = function(){
+                    if(player.wavesurfer.isPlaying()){
+                        player.wavesurfer.pause()
+                    }
+                    else{
+                        player.wavesurfer.play()
+                    }
+                }
+            });
+        })
+    </script>

@@ -28,9 +28,19 @@ class CommentsController < ApplicationController
   end
 
   def edit
+    @comment = Comment.find(params[:id])
+    @song = @comment.song
+    
   end
 
   def update
+    @comment = Comment.find(params[:id])
+    @comment.comment = params[:comment][:comment]
+    if @comment.update(comment_params)
+      redirect_to song_path(@comment.song)
+    else
+      redirect_to edit_comment_path(@comment)
+    end
   end
 
   def destroy
@@ -38,5 +48,9 @@ class CommentsController < ApplicationController
     @song = @comment.song
     @comment.destroy
     redirect_to song_path(@song)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:comment)
   end
 end

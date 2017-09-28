@@ -8,6 +8,7 @@ class SongsController < ApplicationController
       puts "genre not nil"
       @songs = Song.where(:genre => genre).to_a
     end
+    @genre = genre
     @users = User.all
     @comment = Comment.new
   end

@@ -6,6 +6,9 @@
         </div>
 </div>
 <% end %>
+<% unless @genre == nil %>
+    <h1>Showing all #<%= @genre %></h1>
+<% end %>
 <% @songs.each do |s| %>
     <div class="player" data-songfile="<%= s.songfile %>" data-id="<%= s.id %>" id="song-<%= s.id %>">
         <%= image_tag  s.user.avatar.url(:thumb), size: "100x100" %>
@@ -24,6 +27,10 @@
     <% if s.comments.count >= 1 %>
         <ul class="list group">
         <li class="list-group-item"><%= s.comments.first.user.username %> - <%= s.comments.first.comment %></li>
+        <% if current_user.id == s.comments.first.user.id %>
+            <%= link_to "edit comment", edit_comment_path(s.comments.first.id) %>
+            <%= link_to "delete comment", comment_path(s.comments.first), data: { confirm: "Are you sure you want to delete this comment?"}, method: 'DELETE' %>
+        <% end %>
         </ul>
     <% end %>
 <% end %>
