@@ -5,6 +5,11 @@ class Song < ApplicationRecord
   has_attached_file :songpath,
   default_url: ActionController::Base.helpers.asset_path('missing_file.mp3')
   do_not_validate_attachment_file_type :songpath
+
+  has_attached_file :songcovimg,
+  styles: {song_cov: "800x300#"},
+  :default_url => ActionController::Base.helpers.asset_path("missing_song_cover_photo.jpg")
+  validates_attachment_content_type :songcovimg, content_type: /\Aimage\/.*\z/
   # validates_attachment_content_type :songpath,
   # content_type: [
   #   'application/mp3',

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170927204656) do
+ActiveRecord::Schema.define(version: 20170928220134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 20170927204656) do
     t.string "songpath_content_type"
     t.integer "songpath_file_size"
     t.datetime "songpath_updated_at"
+    t.string "songcovimg_file_name"
+    t.string "songcovimg_content_type"
+    t.integer "songcovimg_file_size"
+    t.datetime "songcovimg_updated_at"
     t.index ["user_id"], name: "index_songs_on_user_id"
   end
 
@@ -60,6 +64,10 @@ ActiveRecord::Schema.define(version: 20170927204656) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string "covimg_file_name"
+    t.string "covimg_content_type"
+    t.integer "covimg_file_size"
+    t.datetime "covimg_updated_at"
   end
 
   add_foreign_key "comments", "songs"

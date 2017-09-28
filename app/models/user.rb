@@ -9,4 +9,10 @@ class User < ApplicationRecord
     :default_url => ActionController::Base.helpers.asset_path("missing.jpg")
 
     validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
+    has_attached_file :covimg,
+    styles: {user_cov: "800x300#"},
+    :default_url => ActionController::Base.helpers.asset_path("missing_cover_photo.jpg")
+
+    validates_attachment_content_type :covimg, content_type: /\Aimage\/.*\z/
 end

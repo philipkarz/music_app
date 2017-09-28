@@ -4,9 +4,11 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button> 
-        <h2>Free.ly</h2>
+        <h2><%= link_to "Free.ly", root_path %></h2>
         <h3><%= link_to_if(logged_in?, "Upload", new_song_path ) { link_to( "Upload", new_session_path ) } %></h3>
-        <h3>Credit</h3>
+        <% if logged_in? %>
+          <h3>Credit</h3>
+        <% end %>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
                 <% if logged_in? %>

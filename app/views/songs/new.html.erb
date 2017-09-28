@@ -2,7 +2,7 @@
  <%= form_for @song, :html => {:class => "form-group"} do |f| %>
     Title <%= f.text_field :title, class: "form-control" %>
     Genre <%= f.text_field :genre, class: "form-control" %><br>
-    Cover Image <%= f.file_field :songpic, class: "form-control" %><br>
+    Cover Image <%= f.file_field :songcovimg, class: "form-control" %><br>
     Audio File <%= f.file_field :songpath, class: "form-control" %>
  <%= f.submit %>
  <% end %>

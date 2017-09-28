@@ -2,7 +2,7 @@
 <%= form_for @user,:html => {:class => 'form-group'} do |f| %>
     Username <%= f.text_field :username, :placeholder => current_user.username, class: "form-control" %><br>
     Profile Pic <%=f.file_field :avatar, class: "form-control" %><br>
-    Cover Photo <%=f.file_field :covpic, class: "form-control" %><br>
+    Cover Photo <%=f.file_field :covimg, class: "form-control" %><br>
     Monero Address<%=f.text_field :chadress, :placeholder => current_user.chadress, class: "form-control" %><br>
     Hometown <%=f.text_field :hometown, :placeholder => current_user.hometown, class: "form-control" %><br>
     Website <%=f.text_field :website, :placeholder => current_user.website, class: "form-control" %><br>

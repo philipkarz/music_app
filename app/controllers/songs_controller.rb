@@ -26,6 +26,7 @@ class SongsController < ApplicationController
     @song = Song.new
     @song.title = params[:song][:title]
     @song.genre = params[:song][:genre]
+    @song.songcovimg = params[:song][:songcovimg]
     @song.songpath = params[:song][:songpath]
     @song.user = current_user
     if @song.save
@@ -44,6 +45,7 @@ class SongsController < ApplicationController
     @song = Song.find(params[:id])
     @song.title = params[:song][:title]
     @song.genre = params[:song][:genre]
+    @song.songcovimg = params[:song][:songcovimg]
     @song.songpath = params[:song][:songpath]
     @song.user = current_user
     if @song.save

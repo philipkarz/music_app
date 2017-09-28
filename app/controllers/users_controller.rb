@@ -42,6 +42,7 @@ class UsersController < ApplicationController
     @user.chadress = params[:user][:chadress]
     @user.hometown = params[:user][:hometown]
     @user.avatar = params[:user][:avatar]
+    @user.covimg = params[:user][:covimg]
     @user.facebook = params[:user][:facebook]
     @user.twitter = params[:user][:twitter]
     @user.instagram = params[:user][:instagram]
@@ -61,7 +62,7 @@ class UsersController < ApplicationController
   #makes sure you cant do things like adding an admin field and making it true
   #user_params is anything we will use in user#create
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation, :avatar, :covimg)
     #password_confirmation makes passwords have to match to be saved
   end
 end
