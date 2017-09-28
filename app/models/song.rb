@@ -3,7 +3,7 @@ class Song < ApplicationRecord
   has_many :comments, dependent: :delete_all
 
   has_attached_file :songpath,
-  default_url: "/songs/:style/missing_file.mp3"
+  default_url: ActionController::Base.helpers.asset_path('missing_file.mp3')
   do_not_validate_attachment_file_type :songpath
   # validates_attachment_content_type :songpath,
   # content_type: [

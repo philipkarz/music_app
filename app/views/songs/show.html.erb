@@ -1,6 +1,11 @@
 <%= image_tag  @song.user.avatar.url(:thumb), size: "100x100" %>
 <h1><%= link_to @song.user.username, user_path(@song.user) %> - <%= link_to @song.title, song_path(@song.id) %></h1>
-
+<!-- 
+    adding this new code for error handling
+ -->
+<% if @song.songfile == nil %>
+    <% @song.songfile = @song.songpath.url %>
+<% end %>
 <div class="player" data-songfile="<%= @song.songfile %>" data-id="<%= @song.id %>" id="song-<%= @song.id %>"> 
     <h3>#<%= @song.genre %></h3>
     <h3><%= time_ago_in_words @song.created_at %></h3>
