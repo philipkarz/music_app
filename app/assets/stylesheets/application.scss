@@ -1,3 +1,18 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+.avatar {
+    border-radius: 25px
+}
+.audio-control {
+    margin: 5px
+}
+.btn-circle {  
+    border-radius: 100%;
+    margin: 25% 40% 25% 25%;
+}
+.p-icon {
+    margin-left: 10%;
+    text-align: center;
+}
