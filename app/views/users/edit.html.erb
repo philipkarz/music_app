@@ -1,17 +1,17 @@
 <h1><%= current_user.username %></h1>
-<%= form_for @user do |f| %>
-    <%= f.text_field :username, :placeholder => current_user.username %><br>
-    Profile Pic <%=f.file_field :avatar %><br>
-    Cover Photo <%=f.file_field :covpic, :placeholder => current_user.covpic %><br>
-    <%=f.text_field :chadress, :placeholder => current_user.chadress %><br>
-    <%=f.text_field :hometown, :placeholder => current_user.hometown %><br>
-    <%=f.text_field :website, :placeholder => current_user.website %><br>
-    <%=f.text_field :facebook, :placeholder => current_user.facebook %><br>
-    <%=f.text_field :twitter, :placeholder => current_user.twitter %><br>
-    <%=f.text_field :instagram, :placeholder => current_user.instagram %><br>
-    <%=f.text_field :spotify, :placeholder => current_user.spotify %><br>
+<%= form_for @user,:html => {:class => 'form-group'} do |f| %>
+    Username <%= f.text_field :username, :placeholder => current_user.username, class: "form-control" %><br>
+    Profile Pic <%=f.file_field :avatar, class: "form-control" %><br>
+    Cover Photo <%=f.file_field :covpic, class: "form-control" %><br>
+    Monero Address<%=f.text_field :chadress, :placeholder => current_user.chadress, class: "form-control" %><br>
+    Hometown <%=f.text_field :hometown, :placeholder => current_user.hometown, class: "form-control" %><br>
+    Website <%=f.text_field :website, :placeholder => current_user.website, class: "form-control" %><br>
+    Facebook <%=f.text_field :facebook, :placeholder => current_user.facebook, class: "form-control" %><br>
+    Twitter <%=f.text_field :twitter, :placeholder => current_user.twitter, class: "form-control" %><br>
+    Instagram <%=f.text_field :instagram, :placeholder => current_user.instagram, class: "form-control" %><br>
+    Spotify <%=f.text_field :spotify, :placeholder => current_user.spotify, class: "form-control" %><br>
     <%= f.submit "Update Account", :class => "btn"%>
-    <%= link_to "Delete Account", user_path(current_user), method: 'delete', class: "btn btn-danger"%>
+    <%= link_to "Delete Account", user_path(current_user), method: 'DELETE', class: "btn btn-danger"%>
 <% end %>
 
 

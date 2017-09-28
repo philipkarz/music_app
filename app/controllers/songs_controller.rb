@@ -1,6 +1,13 @@
 class SongsController < ApplicationController
   def index
-    @songs = Song.all
+    genre = params[:genre_param]
+    if genre == nil
+      puts "genre is nil"
+      @songs = Song.all
+    else
+      puts "genre not nil"
+      @songs = Song.where(:genre => genre).to_a
+    end
     @users = User.all
     @comment = Comment.new
   end
@@ -16,6 +23,10 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.new
+    @song.title = params[:song][:title]
+    @song.genre = params[:song][:genre]
+    @song.songpath = params[:song][:songpath]
+    @song.user = current_user
     if @song.save
       redirect_to song_path(@song)
     else
@@ -25,11 +36,26 @@ class SongsController < ApplicationController
   end
 
   def edit
+    @song = Song.find(params[:id])
   end
 
   def update
+    @song = Song.find(params[:id])
+    @song.title = params[:song][:title]
+    @song.genre = params[:song][:genre]
+    @song.songpath = params[:song][:songpath]
+    @song.user = current_user
+    if @song.save
+      redirect_to song_path(@song)
+    else
+      flash[:danger] = "Error Editing File"
+      redirect_to song_path(params[:id])
+    end
   end
 
   def destroy
+    @song = Song.find(params[:id])
+    @song.destroy
+    redirect_to root_path
   end
 end

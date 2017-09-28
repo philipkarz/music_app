@@ -38,6 +38,15 @@ class UsersController < ApplicationController
   def update
     #gets called on edit form submission
     @user = current_user
+    @user.username = params[:user][:username]
+    @user.chadress = params[:user][:chadress]
+    @user.hometown = params[:user][:hometown]
+    @user.avatar = params[:user][:avatar]
+    @user.facebook = params[:user][:facebook]
+    @user.twitter = params[:user][:twitter]
+    @user.instagram = params[:user][:instagram]
+    @user.spotify = params[:user][:spotify]
+
     if @user.update(user_params)
       redirect_to user_path(@user)
     else

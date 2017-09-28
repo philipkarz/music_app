@@ -9,13 +9,18 @@
             <h3>#<%= s.genre %></h3>
             <button type="button" class="btn" id="play-<%= s.id %>"><i class="fa fa-play" aria-hidden="true"></i>Play</button>           
         </div>
+        <% if s.user == current_user %>
+            <%= link_to "Edit Song", edit_song_path(s) %>
+        <% end %>
         <%= form_for @comment, :html => {:class => 'form_group'} do |c|%>
-        <%= c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
-        <%= c.hidden_field :song_id, value: s.id %>
-    <% end %>
-    <ul class="list group">
-    <li class="list-group-item"><%= s.comments.first.user.username %> - <%= s.comments.first.comment %></li>
-    </ul>
+            <%= c.text_field :comment, :placeholder => "comment here", class: 'form-control' %>
+            <%= c.hidden_field :song_id, value: s.id %>
+        <% end %>
+        <% if s.comments.count >= 1 %>
+            <ul class="list group">
+            <li class="list-group-item"><%= s.comments.first.user.username %> - <%= s.comments.first.comment %></li>
+            </ul>
+        <% end %>
     <% end %>
 <% end %>
  <script>

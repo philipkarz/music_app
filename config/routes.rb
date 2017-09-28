@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'songs#index'
+  get 'songs/genre/:id' => 'songs#locate_by_genre', :as => :locate_by_genre
   resources :songs
   resources :users
   resources :comments
