@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authorize, only: [:edit, :update, :create, :destroy]
+
   def index
   end
 
@@ -30,17 +32,25 @@ class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
     @song = @comment.song
-    
+    unless @current_user == @comment.user
+      flash[:danger] = "Don't try to put words in other's mouths"
+      redirect_to song_path(@song) 
+    end
   end
 
   def update
     @comment = Comment.find(params[:id])
-    @comment.comment = params[:comment][:comment]
-    if @comment.update(comment_params)
-      redirect_to song_path(@comment.song)
-    else
-      redirect_to edit_comment_path(@comment)
+    unless current_user == @comment.user
+      flash[:danger] = "Don't try to put words in other's mouths"
+      redirect_to song_path(@comment.song) 
     end
+      @comment.comment = params[:comment][:comment]
+      if @comment.update(comment_params)
+        redirect_to song_path(@comment.song)
+      else
+        redirect_to edit_comment_path(@comment)
+      end
+    
   end
 
   def destroy

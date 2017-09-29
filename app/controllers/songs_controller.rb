@@ -39,10 +39,18 @@ class SongsController < ApplicationController
 
   def edit
     @song = Song.find(params[:id])
+    unless @current_user == @song.user
+      flash[:danger] = "Don't try to edit someone's song"
+      redirect_to song_path(@song)
+    end
   end
 
   def update
     @song = Song.find(params[:id])
+    unless @current_user == @song.user
+      flash[:danger] = "Don't try to edit someone's song"
+      redirect_to song_path(@song)
+    end
     @song.title = params[:song][:title]
     @song.genre = params[:song][:genre]
     @song.songcovimg = params[:song][:songcovimg]
@@ -52,7 +60,7 @@ class SongsController < ApplicationController
       redirect_to song_path(@song)
     else
       flash[:danger] = "Error Editing File"
-      redirect_to song_path(params[:id])
+      redirect_to song_path(@song)
     end
   end
 

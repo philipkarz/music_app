@@ -27,9 +27,8 @@ class UsersController < ApplicationController
 
   def edit
     #edit user if signed in
-    if logged_in?
-      @user = current_user
-    else
+    @user = User.find(params[:id])
+    unless current_user == @user
       flash[:danger] = "Do Not Attempt To Edit Another User"
       redirect_to new_session_path
     end
@@ -56,6 +55,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    session.clear
+    @user.destroy
+    redirect_to root_path
   end
 
   private

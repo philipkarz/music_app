@@ -1,7 +1,12 @@
 @import "bootstrap";
 @import "font-awesome-sprockets";
 @import "font-awesome";
-
+body{
+    font-family: 'Questrial', sans-serif;
+}
+a:hover {
+    text-decoration: none;
+}
 .avatar {
     border-radius: 25px
 }
@@ -11,6 +16,11 @@
 .btn-circle {  
     border-radius: 100%;
     margin: 25% 40% 25% 25%;
+}
+
+.btn-circle:hover{
+    background-color: #007bff;
+    color: orange;
 }
 .p-icon {
     margin-left: 10%;
